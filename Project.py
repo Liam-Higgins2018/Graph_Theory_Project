@@ -119,5 +119,15 @@ def compile(profix):
   #NFA stack should only have a single nfa on it at this point
   return nfastack.pop()
 
+#print(compile("ab.cd.|"))
+#print(compile("aa.*"))
 
+
+# A few tests
+infixes = ["a.b.c", "a.(b|d).c", "(a.(b.b)*.c"]
+strings = ["", "abc", "abbc", "abcc", "abad","abbc"]
+
+for i in infixes:
+    for s in strings:
+        print(match(i, s), i, s)
 
