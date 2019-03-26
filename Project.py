@@ -122,6 +122,26 @@ def compile(profix):
 #print(compile("ab.cd.|"))
 #print(compile("aa.*"))
 
+def followes(state):
+  """Return the set of states from state following e arrows"""
+  #Create a new set with state as its only member
+  states = set()
+  states.add(state)
+
+    #Check if state has arrows labelled e from it 
+    if state.label is None:
+        #Check if edge1 is a state 
+        if state.edge1 is not None:
+            #if theres an edge1 follow it
+            states |= followes(state.edge1)
+            #Check if edge2 is a state
+        if state.edge2 is not None:
+            #if theres an edge2 follow it
+            states |= followes(state.edge2)
+
+    # Return the set of states.
+    return states
+
 
 # A few tests
 infixes = ["a.b.c", "a.(b|d).c", "(a.(b.b)*.c"]
