@@ -39,5 +39,85 @@ def shunt(infix):
   #Returns postfix regex
   return pofix
 
-print(shunt("(a.b)|(c*.d)"))
+#print(shunt("(a.b)|(c*.d)"))
+
+
+
+#Represents a state with two arrows, labelled by label
+#Use None for a label representing "e" arrows
+class state:
+  label = None
+  edge1 = None
+  edge2 = None
+
+#NFA is represented by its initial and accept states
+class nfa:
+  initial = None
+  accept = None
+
+  def __init__(self, initial, accept):
+        self.initial = initial
+        self.accept = accept
+
+def compile(profix):
+  """ compiles a postfix regular expression into an NFA."""
+
+        nfastack = []
+  
+    for c in profix:
+  
+        if c == '.':
+            #Pop 2 states off the stack
+            nfa2 = nfastack.pop()
+            nfa1 = nfastack.pop()
+            #Connect the first NFA's state to the second initial
+            nfa1.accept.edge1 = nfa2.initial
+            #Push new NFA's to the stack
+            newnfa = nfa(nfa1.initial, nfa2.accept)
+            nfastack.append(newnfa)
+        elif c == '|':
+            #Pop 2 states off the stack
+            nfa2 = nfastack.pop()
+            nfa1 = nfastack.pop()
+            #Create a new initial state,connect it to initial states of NFA1 and NFA2
+            initial = state()
+            initial.edge1 = nfa1.initial
+            initial.edge2 = nfa2.initial
+            #Create a new accept state, connecting the two accept states of the two nfa's popped from the stack to the new state
+            accept = state()
+            nfa1.accept.edge1 = accept
+            nfa2.accept.edge2 = accept
+            #Push new NFA's to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
+        elif c == '*':
+            #Pop a single nfa from the stack
+            nfa1 = nfastack.pop()
+            #Create new initial and accept states
+            initial = state()
+            accept = state()
+            #Join the new initial state to nfa1's initial state and the new accept state
+            initial.edge1 = nfa1.initial
+            initial.edge2 = accept
+            #Join the old accept state to the new accept state and nfa1's initial state
+            nfa1.accept.edge1 = nfa1.initial
+            nfa2.accept.edge2 = accept
+            #Push new nfa to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
+        else:
+            #Create new initial and accept states
+            accept = state()
+            initial = state()
+            #Join the initial state to the accept state using an arrow labelled c
+            initial.label = c
+            initial.edge1 = accept
+            #Push new nfa to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
+    
+  #NFA stack should only have a single nfa on it at this point
+  return nfastack.pop()
+
+
 
