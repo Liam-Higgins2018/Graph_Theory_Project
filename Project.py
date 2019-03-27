@@ -5,7 +5,7 @@ def shunt(infix):
     """The Shunting Yard Algorithm for converting infix regular expressions 
     to postfix."""
     # special characters for regular expressions and their precidence
-    specials = {'*': 50, '+': 45, '.': 40, '^': 35, '|': 30}
+    specials = {'*': 50, '+': 45, '.': 40, '?': 35, '|': 30}
     # will eventually be the output
     pofix = ""
     # operator stack
@@ -92,6 +92,20 @@ def compile(profix):
             #Connect nfa2 to the accept state
             nfa2.initial.edge1 = accept
             # Push new NFA to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
+        elif c == '?':
+            #Poop a single NFA from the stack
+            nfa1 = nfastack.pop()
+            #Create an initial and accept state
+            initial, accept = state(), state()
+            #Join the initial state to the nfa1's initial
+            #and to the accept state
+            initial.edge1 = nfa1.initial
+            initial.edge2 = accept
+            #Connect nfa1's accept state to the accept state
+            nfa1.accept.edge1 = accept
+            #Pushes the new nfa to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
         elif c == '*':
