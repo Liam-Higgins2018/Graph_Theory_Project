@@ -108,6 +108,18 @@ def compile(profix):
             #Pushes the new nfa to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
+        elif c == '^':
+            #Pop a single NFA from the stack
+            nfa1 = nfastack.pop()
+            #Create the initial and accept state
+            initial, accept = state(),state()
+            #Join the initial state to the nfa1's initial
+            initial.edge1 = nfa1.initial
+            #Connect the nfa1's accept state to the accept state
+            nfa1.accept.edge1 = accept
+            #Pushes the new nfa to the stack
+            newnfa = nfa(initial, accept)
+            nfastack.append(newnfa)
         elif c == '*':
             # Pop a single NFA from the stack
             nfa1 = nfastack.pop()
@@ -187,7 +199,7 @@ infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
 strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
 
 ##infixes = ["^h"]
-##strings = ["j"]
+##strings = ["k"]
 
 for i in infixes:
     for s in strings:
