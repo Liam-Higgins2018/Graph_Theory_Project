@@ -5,7 +5,7 @@ def shunt(infix):
     """The Shunting Yard Algorithm for converting infix regular expressions 
     to postfix."""
     # special characters for regular expressions and their precidence
-    specials = {'*': 50, '+': 50, '?': 50, '.': 45, '^' : 40, '|': 30}
+    specials = {'*': 50, '+': 50, '?': 50, '.': 45, '^' : 40, '$': 40, '|': 30}
     # will eventually be the output
     pofix = ""
     # operator stack
@@ -198,8 +198,6 @@ def match(infix, string):
 infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
 strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
 
-##infixes = ["^h"]
-##strings = ["k"]
 
 for i in infixes:
     for s in strings:
