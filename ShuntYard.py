@@ -1,3 +1,6 @@
+#Shuntin Yard Algorithm
+#Liam Higgins
+
 #Shunting Yard Algorithm in the ShuntingYard.py file
 def shunt(infix):
     """The Shunting Yard Algorithm for converting infix regular expressions 

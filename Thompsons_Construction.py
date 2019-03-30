@@ -1,3 +1,6 @@
+#Thompsons Construction
+#Liam Higgins
+
 # Represents a state with two arrows labelles by label
 # Use None for a label represenring "e" arrows
 class state:
