@@ -120,7 +120,7 @@ def compile(profix):
             #Pushes the new nfa to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
-        elif c == '$'
+        elif c == '$':
             #Pop two NFA's from the stack
             nfa1, nfa2 = nfastack.pop(), nfastack.pop()
             #Creates an initial state
@@ -211,12 +211,19 @@ def match(infix, string):
     return (nfa.accept in current)
 # A few tests
 
-##options = int(input("Please enter\n: 1) To read regular expressions from a file.\n 2) To input "))
+options = int(input("\nPlease enter:\n 1) To read a sample test of regular expressions and strings\n 2) To input custom user regular expressions and strigs\n\n"))
 
-infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
-strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
+if options == 1:
+    #Sample Regular Expressions and Strings
+    infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
+    strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
 
 
-for i in infixes:
-    for s in strings:
-        print(match(i, s), i, s)
+    for i in infixes:
+        for s in strings:
+            print(match(i, s), i, s)
+
+elif options == 2:
+    userInfix = input("Please enter your regular expression in the infix notation: ")
+    userString = input("Please enter a string to compare against your infix notation: ")
+    print(match(userInfix, userString), userInfix, userString)
