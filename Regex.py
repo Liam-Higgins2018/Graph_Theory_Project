@@ -28,20 +28,20 @@ def match(infix, string):
     # shunt and compile the regular expression
     postfix = shunt(infix)
     nfa = compile(postfix)
-    # the current set of states and the next set of states
-    current, next = set(), set()
-    # Add the initial state to the current set
-    current |= followes(nfa.initial)
+    # the currentState set of states and the nextState set of states
+    currentState, nextState = set(), set()
+    # Add the initial state to the currentState set
+    currentState |= followes(nfa.initial)
     # loop through set of character in the string
     for s in string:
-        # Loop through the current set of states
-        for c in current:
+        # Loop through the currentState set of states
+        for c in currentState:
             # Check if that state is labelled s
             if c.label == s:
-                # Add the edge1 state to the next set
-                next |= followes(c.edge1)
-        # Set current to next, and clear out next
-        current = next
-        next  = set()
-    # Check if the accept state is in the set of current states
-    return (nfa.accept in current)
+                # Add the edge1 state to the nextState set
+                nextState |= followes(c.edge1)
+        # Set currentState to nextState, and clear out nextState
+        currentState = nextState
+        nextState  = set()
+    # Check if the accept state is in the set of currentState states
+    return (nfa.accept in currentState)
