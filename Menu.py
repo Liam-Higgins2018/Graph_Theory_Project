@@ -14,8 +14,8 @@ options = int(input("\nPlease enter:\n 1) To read a sample test of regular expre
 while True:
     if options == 1:
         #Sample Regular Expressions and Strings
-        infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c"]
-        strings = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
+        infixes = ["a.b.c+", "a.(b|d).c+", "(a.(b|d))*", "a.(b.b)*.c","^b","?b"]
+        strings = ["", "abc", "abbc", "abcc", "abad", "abbbc","dbca","cadd","b"]
 
         for i in infixes:
             for s in strings:
