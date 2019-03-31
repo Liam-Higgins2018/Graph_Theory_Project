@@ -41,19 +41,15 @@ def compile(profix):
             nfastack.append(newnfa)
         elif c == '+':
             # pop two NFA's off the stack
-            nfa2, nfa1 = nfastack.pop(), nfastack.pop()
-            # Create a new initial state, connect it to initial states
-            # of the two NFA's popped from the stack.
-            initial = state()
+            nfa1 = nfastack.pop()
+            # Create a new initial state and initial state, connect the initial to initial states
+            # of the two NFA popped from the stack.
+            initial, accept  = state(),state()
             initial.edge1 = nfa1.initial
-            # Create a new accept state
-            accept = state()
             #Connect the first edge of nfa1's accept back to nfa1's initial
             nfa1.accept.edge1 = nfa1.initial
-            #Connect the second edge of nfa1 to the initial state of nfa2
-            nfa1.accept.edge2 = nfa2.initial
-            #Connect nfa2 to the accept state
-            nfa2.initial.edge1 = accept
+            #Connect the second edge of nfa1 to the accept initial
+            nfa1.accept.edge2 = accept
             # Push new NFA to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
