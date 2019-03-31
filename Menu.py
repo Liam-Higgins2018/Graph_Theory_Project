@@ -19,13 +19,13 @@ while True:
 
         for i in infixes:
             for s in strings:
-                print(match(i, s), i, s)
+                print(match(i.lower(), s.lower()), i, s)
 
     elif options == 2:
         #Custom user infix and string
         userInfix = input("\nPlease enter your regular expression in the infix notation: ")
         userString = input("Please enter a string to compare against your infix notation: ")
-        print(match(userInfix, userString), userInfix, userString)
+        print(match(userInfix.lower(), userString.lower()), userInfix, userString)
     
     elif options == 3:
         print("Goodbye!!\n")
