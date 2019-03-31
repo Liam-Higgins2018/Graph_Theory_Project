@@ -6,7 +6,7 @@ def shunt(infix):
     """The Shunting Yard Algorithm for converting infix regular expressions 
     to postfix."""
     # special characters for regular expressions and their precidence
-    specials = {'*': 50, '+': 50, '?': 50, '.': 45, '^' : 40, '$': 40, '|': 30}
+    specials = {'*': 50, '+': 50, '?': 50, '.': 45, '^' : 40, '|': 30}
     # will eventually be the output
     pofix = ""
     # operator stack

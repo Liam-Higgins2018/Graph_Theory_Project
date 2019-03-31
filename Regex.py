@@ -7,7 +7,7 @@ from Thompsons_Construction import compile
 
 def followes(state):
     """Return the set of states that can be reached from state following e arrows"""
-    # Create a new se, with state as its only member
+    # Create a new set, with state as its only member
     states = set()
     states.add(state)
     # Check id state has arrows labelled e from it
@@ -22,7 +22,6 @@ def followes(state):
             states |= followes(state.edge2)
     # Return the set of states
     return states
-
 
 def match(infix, string):
     """Matches string to infix regular expression"""

@@ -23,7 +23,7 @@ while True:
 
     elif options == 2:
         #Custom user infix and string
-        userInfix = input("Please enter your regular expression in the infix notation: ")
+        userInfix = input("\nPlease enter your regular expression in the infix notation: ")
         userString = input("Please enter a string to compare against your infix notation: ")
         print(match(userInfix, userString), userInfix, userString)
     
@@ -37,4 +37,3 @@ while True:
         
     options = int(input("\nPlease enter:\n 1) To read a sample test of regular expressions and strings\n " +
                         "2) To input custom user regular expressions and strigs\n 3) To exit the program\n\n"))
-

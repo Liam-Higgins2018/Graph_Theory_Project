@@ -83,24 +83,6 @@ def compile(profix):
             #Pushes the new nfa to the stack
             newnfa = nfa(initial, accept)
             nfastack.append(newnfa)
-        elif c == '$':
-            #Pop two NFA's from the stack
-            nfa1, nfa2 = nfastack.pop(), nfastack.pop()
-            #Creates an initial state
-            initial = state()
-            #Let's nfa1's initial state be the accept state
-            accept = nfa1.initial
-            #Connects the initial state to the initial state of nfa2
-            initial.edge1 = nfa2.initial
-            #Connects the nfa2's accept state to the initial state of nfa1
-            nfa2.accept.edge1 = nfa1.initial
-            #Connects the accept state of nfa1 back to the initial state of nfa1
-            nfa1.accept.edge1 = nfa1.initial
-            #Connects the accept state of nfa1 to the initial state of nfa2
-            nfa1.accempt.edge2 = nfa2.initial
-            #Pushes the nes nfa to the stack
-            newnfa = nfa(initial, accept)
-            nfastack.append(newnfa)
         elif c == '*':
             # Pop a single NFA from the stack
             nfa1 = nfastack.pop()
