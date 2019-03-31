@@ -25,8 +25,6 @@ def followes(state):
 
 def match(infix, string):
     """Matches string to infix regular expression"""
-    infix = infix.upper()
-    string = string.upper()
     # shunt and compile the regular expression
     postfix = shunt(infix)
     nfa = compile(postfix)
